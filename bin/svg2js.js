@@ -5,7 +5,15 @@ const fs = require('fs');
 const path = require('path');
 const onml = require('onml');
 const json5 = require('json5');
-const argv = require('yargs').argv;
+
+const argv = { i: undefined };
+const args = process.argv.slice(2);
+for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    if (arg === '-i' || arg === '--input') {
+        argv.i = args[++i];
+    }
+}
 
 const styles = {};
 

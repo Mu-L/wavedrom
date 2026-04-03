@@ -1,6 +1,4 @@
-[![Linux](https://github.com/wavedrom/wavedrom/actions/workflows/linux.yml/badge.svg)](https://github.com/wavedrom/wavedrom/actions/workflows/linux.yml)
-[![MacOS](https://github.com/wavedrom/wavedrom/actions/workflows/macos.yml/badge.svg)](https://github.com/wavedrom/wavedrom/actions/workflows/macos.yml)
-[![Windows](https://github.com/wavedrom/wavedrom/actions/workflows/windows.yml/badge.svg)](https://github.com/wavedrom/wavedrom/actions/workflows/windows.yml)
+[![CI](https://github.com/wavedrom/wavedrom/actions/workflows/ci.yml/badge.svg)](https://github.com/wavedrom/wavedrom/actions/workflows/ci.yml)
 [![NPM version](https://img.shields.io/npm/v/wavedrom.svg)](https://www.npmjs.org/package/wavedrom)
 <span class="badge-paypal"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=J6WR5E7TJGSY2&lc=US&item_name=WaveDrom&item_number=github&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span>
 [![Coverage Status](https://coveralls.io/repos/github/wavedrom/wavedrom/badge.svg?branch=trunk)](https://coveralls.io/github/wavedrom/wavedrom?branch=trunk)
@@ -49,6 +47,29 @@ svg.wavedrom.com
 
 <img src="https://svg.wavedrom.com/{signal:[{name:'clk',wave:'p......'},{name:'bus',wave:'x.34.5x',data:'head body tail'},{name:'wire',wave:'0.1..0.'}]}"/>
 
+## CLI
+
+**WaveDrom** can be used from the command line to generate SVG files from JSON5 source.
+
+### Run with npx
+
+```bash
+npx wavedrom --input source.json5 > output.svg
+```
+
+### Global Installation
+
+```bash
+npm install -g wavedrom
+wavedrom --input source.json5 --indent 2 > output.svg
+```
+
+### Options
+
+*   `-i`, `--input <path>`: (Required) Path to the WaveJSON source file.
+*   `-t`, `--indent <number>`: Text indent in the output SVG.
+*   `-h`, `--help`: Show help message.
+
 ## Web usage
 
 **WaveDrom** timing diagrams can be embedded into the web pages, blogs, and wikis to be rendered by the most of modern browsers.
@@ -59,11 +80,16 @@ There are three steps to insert **WaveDrom** diagrams directly into your page:
 
 1) Put the following line into your HTML page ```<header>``` or ```<body>```:
 
-From a CDN:
+From a CDN (jsDelivr):
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.1.0/skins/default.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.1.0/wavedrom.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/wavedrom@3/wavedrom.min.js" type="text/javascript"></script>
+```
+
+or (unpkg):
+
+```html
+<script src="https://unpkg.com/wavedrom@3/wavedrom.min.js" type="text/javascript"></script>
 ```
 
 2) Set the ``onload`` event for the HTML body.
