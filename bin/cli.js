@@ -5,6 +5,7 @@ const fs = require('fs');
 const json5 = require('json5');
 const onml = require('onml');
 
+const pkg = require('../package.json');
 const lib = require('../lib');
 const def = require('../skins/default.js');
 const narrow = require('../skins/narrow.js');
@@ -27,7 +28,11 @@ for (let i = 0; i < args.length; i++) {
     } else if (arg === '-h' || arg === '--help') {
         console.log('Usage: wavedrom --input <path> [--indent <indent>]');
         process.exit(0);
+    } else if (arg === '-v' || arg === '--version') {
+        console.log(pkg.version);
+        process.exit(0);
     }
+    // TODO: --skin / -s: Allowing users to specify the skin via CLI (rather than just inside the JSON) is very helpful.
 }
 
 if (!argv.input) {
