@@ -70,6 +70,14 @@ wavedrom --input source.json5 --indent 2 > output.svg
 *   `-t`, `--indent <number>`: Text indent in the output SVG.
 *   `-h`, `--help`: Show help message.
 
+### Export to PNG
+
+To export a waveform to PNG, you can use the `@resvg/resvg-js-cli` tool:
+
+```bash
+npx wavedrom -i source.json5 | npx @resvg/resvg-js-cli - output.png
+```
+
 ## Web usage
 
 **WaveDrom** timing diagrams can be embedded into the web pages, blogs, and wikis to be rendered by the most of modern browsers.

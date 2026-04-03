@@ -15,57 +15,6 @@ for (let i = 0; i < args.length; i++) {
     }
 }
 
-const styles = {};
-
-const marker1 = ['marker',
-    {
-        id: 'arrowhead',
-        style: 'fill:#0041c4',
-        markerHeight: 7,
-        markerWidth: 10,
-        markerUnits: 'strokeWidth',
-        viewBox: '0 -4 11 8',
-        refX: 15,
-        refY: 0,
-        orient: 'auto'
-    },
-    ['path', {'d':'M0 -4 11 0 0 4z'}]
-];
-
-const marker2 = ['marker',
-    {
-        id: 'arrowtail',
-        style: 'fill:#0041c4',
-        markerHeight: 7,
-        markerWidth: 10,
-        markerUnits: 'strokeWidth',
-        viewBox: '-11 -4 11 8',
-        refX: -15,
-        refY: 0,
-        orient: 'auto'
-    },
-    ['path', {'d':'M0 -4 -11 0 0 4z'}]
-];
-
-const marker3 = ['marker',
-    {
-        id: 'tee',
-        style: 'fill:#0041c4',
-        markerHeight: 6,
-        markerWidth: 1,
-        markerUnits: 'strokeWidth',
-        viewBox: '0 0 1 6',
-        refX: 0,
-        refY: 3,
-        orient: 'auto'
-    },
-    ['path', {'d':'M 0 0 L 0 6', 'style': 'stroke:#0041c4;stroke-width:2'}]
-];
-
-const defs = ['defs'];
-
-const style = ['style', {type: 'text/css'}];
-
 const getDefStyle = () => `
   text{
     font-size: 11pt;
@@ -84,18 +33,6 @@ const getDefStyle = () => `
   .h5 { font-size: 11pt; font-weight: bold }
   .h6 { font-size: 8pt;  font-weight: bold }
 `.replace(/\s+/g, '');
-
-const res = ['svg',
-    {
-        id: 'svg',
-        xmlns: 'http://www.w3.org/2000/svg',
-        'xmlns:xlink': 'http://www.w3.org/1999/xlink',
-        height: '0'
-    },
-    style,
-    defs,
-    ['g', {id: 'waves'}, ['g', {id: 'lanes'}], ['g', {id: 'groups'}]]
-];
 
 function getFill (fillClasses, node) {
     const m = node.attr.style.match(/fill:(#[0-9a-fA-F]+);/);
@@ -116,6 +53,61 @@ function f2o (name, cb) {
     fs.readFile(full, { encoding: 'utf8'}, function (err, dat) {
         if (err) { throw err; }
         const ml = onml.parse(dat);
+
+        const styles = {};
+        const defs = ['defs'];
+        const style = ['style', {type: 'text/css'}];
+        const res = ['svg', {id: 'svg', height: '0'},
+            style,
+            defs,
+            ['g', {id: 'waves'}, ['g', {id: 'lanes'}], ['g', {id: 'groups'}]]
+        ];
+
+        const marker1 = ['marker',
+            {
+                id: 'arrowhead',
+                style: 'fill:#0041c4',
+                markerHeight: 7,
+                markerWidth: 10,
+                markerUnits: 'strokeWidth',
+                viewBox: '0 -4 11 8',
+                refX: 15,
+                refY: 0,
+                orient: 'auto'
+            },
+            ['path', {'d':'M0 -4 11 0 0 4z'}]
+        ];
+
+        const marker2 = ['marker',
+            {
+                id: 'arrowtail',
+                style: 'fill:#0041c4',
+                markerHeight: 7,
+                markerWidth: 10,
+                markerUnits: 'strokeWidth',
+                viewBox: '-11 -4 11 8',
+                refX: -15,
+                refY: 0,
+                orient: 'auto'
+            },
+            ['path', {'d':'M0 -4 -11 0 0 4z'}]
+        ];
+
+        const marker3 = ['marker',
+            {
+                id: 'tee',
+                style: 'fill:#0041c4',
+                markerHeight: 6,
+                markerWidth: 1,
+                markerUnits: 'strokeWidth',
+                viewBox: '0 0 1 6',
+                refX: 0,
+                refY: 3,
+                orient: 'auto'
+            },
+            ['path', {'d':'M 0 0 L 0 6', 'style': 'stroke:#0041c4;stroke-width:2'}]
+        ];
+
         const fillClasses = {
             '.muted': '#aaa',
             '.warning': '#f6b900',
@@ -160,7 +152,6 @@ function f2o (name, cb) {
             '.' + styles[key] + '{' + key + '}');
 
         style.push(getDefStyle() + fills.join('') + extra.join(''));
-        // cb('module.exports = ' + jsof.stringify(res) + ';');
         cb(
             'var WaveSkin=WaveSkin||{};WaveSkin.' +
             path.basename(name, '.svg') + '=' +

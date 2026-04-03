@@ -37,11 +37,10 @@ if (!argv.input) {
 
 const fileName = argv.input;
 fs.readFile(fileName, (err, body) => {
-    if (err) { throw err; }
-    const source = json5.parse(body);
-    const res = lib.renderAny(0, source, skins);
-    const svg = onml.stringify(res, argv.indent);
-    console.log(svg);
+if (err) { throw err; }
+const source = json5.parse(body);
+const res = lib.renderAny(0, source, skins);
+const svg = onml.stringify(res, argv.indent);
+console.log(svg);
 });
-
 /* eslint no-console: 0 */
