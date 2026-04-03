@@ -1,6 +1,6 @@
 {
   "name": "wavedrom",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "description": "Digital timing diagram in your browser",
   "homepage": "http://wavedrom.com",
   "author": "alex.drom@gmail.com",
@@ -51,7 +51,9 @@
     "verilog",
     "RTL"
   ],
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "devDependencies": {
     "@drom/eslint-config": "^0.12.0",
     "chai": "6.2.2",
