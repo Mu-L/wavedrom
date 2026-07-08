@@ -40,8 +40,8 @@
     "dist": "esbuild ./lib/wave-drom.js --bundle --format=iife --outfile=wavedrom.js",
     "watch.dist": "esbuild ./lib/wave-drom.js --bundle --format=iife --outfile=wavedrom.js --watch",
     "dist.min": "node -e \"const banner = require('child_process').execSync('node ./bin/header.js < /dev/null').toString(); require('child_process').execSync('esbuild ./lib/wave-drom.js --bundle --format=iife --minify --outfile=wavedrom.min.js --banner:js=\\\"' + banner.trim() + '\\\"')\"",
-    "unpkg": "esbuild ./lib/index.js --bundle --format=iife --global-name=wavedrom --outfile=wavedrom.unpkg.js",
-    "unpkg.min": "node -e \"const banner = require('child_process').execSync('node ./bin/header.js < /dev/null').toString(); require('child_process').execSync('esbuild ./lib/index.js --bundle --format=iife --global-name=wavedrom --minify --outfile=wavedrom.unpkg.min.js --banner:js=\\\"' + banner.trim() + '\\\"')\"",
+    "unpkg": "node ./bin/unpkg.js",
+    "unpkg.min": "node ./bin/unpkg.js --minify",
     "prepare": "npm-run-all test dist dist.min unpkg unpkg.min",
     "clean": "node -e \"const fs = require('fs'); ['wavedrom.js', 'coverage', '.nyc_output'].forEach(p => fs.rmSync(p, { recursive: true, force: true })); fs.readdirSync('.').forEach(f => { if (f.startsWith('wavedrom.') && f.endsWith('.js')) { fs.rmSync(f, { force: true }); } })\"",
     "skins": "node -e \"['default', 'narrow', 'dark', 'lowkey', 'narrower', 'narrowerer'].forEach(S => require('child_process').execSync('node bin/svg2js.js -i unpacked/skins/' + S + '.svg > skins/' + S + '.js'))\""
